@@ -1,0 +1,86 @@
+#page-landing {
+    background: linear-gradient(329.54deg, #1a75ff 0%, #3385ff 100%);
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-landing .content-wrapper {
+    position: relative;
+
+    width: 100%;
+    max-width: 1020px;
+
+    height: 100%;
+    max-height: 540px;
+
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background: url(../../images/k_azul_m.png) no-repeat 70% center;
+}
+
+#page-landing .content-wrapper img {
+    width: 12rem;
+    border-radius: 0.3rem;;
+}
+
+#page-landing .content-wrapper main {
+    max-width: 340px;
+}
+
+#page-landing .content-wrapper main h1 {    
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 3.6rem;
+}
+
+#page-landing .content-wrapper main p {
+    margin-top: 2.2rem;
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+}
+
+.content-wrapper .location {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    font-size: 1.4rem;
+    line-height: 2.1rem;
+
+    display: flex;
+    flex-direction: column;
+
+    text-align: right;
+}
+
+.content-wrapper .location strong {
+    font-weight: 800;
+}
+
+.content-wrapper .enter-app {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 4rem;
+    height: 4rem;
+    background: orange;
+
+    border-radius: 0.8rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-wrapper .enter-app:hover{
+    opacity: 75%;
+    transition: 0.2s ease; 
+}

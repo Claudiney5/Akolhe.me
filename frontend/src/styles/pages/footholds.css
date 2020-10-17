@@ -1,0 +1,104 @@
+#page-map {
+    width: 100vw;
+    height: 100vh;
+
+    position: relative;
+    display: flex;
+}
+
+#page-map aside {
+    width: 22rem;
+    background: linear-gradient(329.54deg, #1a75ff 0%, #3385ff 100%);
+    padding: 3.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#page-map aside img {
+    border-radius: 0.3rem;
+}
+
+#page-map aside h2 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    line-height: 2.2rem;
+    margin-top: 2.2rem;
+}
+
+#page-map aside p {
+    line-height: 1.8rem;
+    margin-top: 1.5rem;
+}
+
+#page-map aside footer {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 1.8rem;
+    
+}
+
+#page-map aside footer strong {
+    font-weight: 800;
+}
+
+#page-map .leaflet-container {
+    z-index: 5;
+}
+
+#page-map .create-foothold {
+    position: absolute;
+    right: 2.5rem;
+    bottom: 2.5rem;
+
+    z-index: 10;
+
+    width: 4rem;
+    height: 4rem;
+    background: #1a75ff;
+
+    border-radius: 0.8rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+#page-map .create-foothold:hover{
+    opacity: 75%;
+    transition: 0.2s ease; 
+}
+
+#page-map .map-popup .leaflet-popup-content-wrapper {
+    background: rgba(255,255,255,0.8);
+    border-radius: 0.4rem;
+}
+
+#page-map .map-popup .leaflet-popup-content {
+    color: #1a4cff; /*  cor fonte */
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 0.5rem 0.8rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#page-map .map-popup .leaflet-popup-content a {
+    width: 2.2rem;
+    height: 2.2rem;
+    background: #1a4cff;
+    box-shadow: 1rem 1.6rem 2.2rem rgba(23,142,166,0.16);
+    border-radius: 0.4rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-map .map-popup .leaflet-popup-tip-container {
+    display: none;
+}
