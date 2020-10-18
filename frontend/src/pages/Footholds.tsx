@@ -1,25 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GiCampingTent, GiExitDoor } from 'react-icons/gi'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import Leaflet from 'leaflet'
 
-import 'leaflet/dist/leaflet.css'
+import mapIcon from '../utils/mapIcon'
+import logoPeq from '../images/logo_p.png'
+import api from '../services/api'
 
 import '../styles/pages/footholds.css'
 
-import logoPeq from '../images/logo_p.png'
-import marker from '../images/marker02.png'
-
-const mapIcon = Leaflet.icon({
-    iconUrl: marker,
-    iconSize: [40, 60],
-    iconAnchor: [20, 60],
-    popupAnchor: [170, 0]
-})
-
 
 function Footholds() {
+    const [footholds, setFootholds] = useState([])
+
+    console.log(footholds)
+
+    useEffect(() => {
+        api.get('footholds').then((res: any) => {
+            setFootholds(res.data)
+        })
+    }, [])
+
     return (
         <div id="page-map">
 
@@ -53,7 +54,7 @@ function Footholds() {
                 >
                     <Popup  closeButton={false} className="map-popup" minWidth={240} maxWidth={240} >
                         Nome do Ponto do Apoio
-                        <Link to="">
+                        <Link to="/footholds/1">
                             <GiExitDoor size={20} color="#fff" />
                         </Link>
                     </Popup>
@@ -62,7 +63,7 @@ function Footholds() {
             </Map>
 
 
-            <Link to="" className="create-foothold">
+            <Link to="/footholds/create" className="create-foothold">
                 <GiCampingTent size='1.42rem' color="rgba(0, 0, 0, 0.6)"></GiCampingTent>
             </Link>
 

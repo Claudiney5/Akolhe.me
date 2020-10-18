@@ -1,36 +1,19 @@
 import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { FiClock, FiInfo, FiArrowLeft } from "react-icons/fi";
+import { FiClock, FiInfo } from "react-icons/fi";
 import { Map, Marker, TileLayer } from "react-leaflet";
-import { useHistory } from 'react-router-dom';
-import L from 'leaflet';
 
-import mapMarkerImg from '../images/marker02.png';
+import Sidebar from "../components/Sidebar";
+import mapIcon from "../utils/mapIcon";
 
 import '../styles/pages/foothold.css';
 
-const happyMapIcon = L.icon({
-  iconUrl: mapMarkerImg,
-
-  iconSize: [58, 68],
-  iconAnchor: [29, 68],
-  popupAnchor: [0, -60]
-})
 
 export default function Foothold() {
-  const { goBack } = useHistory();
-
   return (
     <div id="page-foothold">
-      <aside>
-        <img src={mapMarkerImg} alt="Happy" />
-
-        <footer>
-          <button type="button" onClick={goBack}>
-            <FiArrowLeft size={24} color="#FFF" />
-          </button>
-        </footer>
-      </aside>
+      
+      <Sidebar />
 
       <main>
         <div className="foothold-details">
@@ -58,8 +41,8 @@ export default function Foothold() {
           </div>
           
           <div className="foothold-details-content">
-            <h1>Lar das meninas</h1>
-            <p>Presta assistência a crianças de 06 a 15 anos que se encontre em situação de risco e/ou vulnerabilidade social.</p>
+            <h1>Alpes Blumenauense</h1>
+            <p>Espaço para até 3 kombihomes</p>
 
             <div className="map-container">
               <Map 
@@ -73,9 +56,9 @@ export default function Foothold() {
                 doubleClickZoom={false}
               >
                 <TileLayer 
-                  url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
+                  url={`https://a.tile.openstreetmap.org/{z}/{x}/{y}.png`}
                 />
-                <Marker interactive={false} icon={happyMapIcon} position={[-27.2092052,-49.6401092]} />
+                <Marker interactive={false} icon={mapIcon} position={[-27.2092052,-49.6401092]} />
               </Map>
 
               <footer>

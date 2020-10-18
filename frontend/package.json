@@ -13,6 +13,7 @@
     "@types/react-leaflet": "^2.5.2",
     "@types/react-router-dom": "^5.1.6",
     "autoprefixer": "^10.0.1",
+    "axios": "^0.20.0",
     "leaflet": "^1.7.1",
     "node": "^14.13.1",
     "nvm": "0.0.4",
