@@ -10,13 +10,19 @@ import api from '../services/api'
 import '../styles/pages/footholds.css'
 
 
-function Footholds() {
-    const [footholds, setFootholds] = useState([])
+interface Foothold {
+    id: number;
+    latitude: number;
+    longitude: number;
+    name: string;
+}
 
-    console.log(footholds)
+
+function Footholds() {
+    const [footholds, setFootholds] = useState<Foothold[]>([])
 
     useEffect(() => {
-        api.get('footholds').then((res: any) => {
+        api.get('footholds').then((res) => {
             setFootholds(res.data)
         })
     }, [])
@@ -48,17 +54,22 @@ function Footholds() {
             >
                 <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             
-                <Marker 
-                    icon={mapIcon}
-                    position={[-27.5961766,-48.5714132]}
-                >
-                    <Popup  closeButton={false} className="map-popup" minWidth={240} maxWidth={240} >
-                        Nome do Ponto do Apoio
-                        <Link to="/footholds/1">
-                            <GiExitDoor size={20} color="#fff" />
-                        </Link>
-                    </Popup>
-                </Marker>
+                {footholds.map(foothold => {
+                    return(
+                        <Marker 
+                            icon={mapIcon}
+                            position={[foothold.latitude, foothold.longitude]}
+                            key={foothold.id}
+                        >
+                            <Popup  closeButton={false} className="map-popup" minWidth={240} maxWidth={240} >
+                                {foothold.name}
+                                <Link to={`/footholds/${foothold.id}`}>
+                                    <GiExitDoor size={20} color="#fff" />
+                                </Link>
+                            </Popup>
+                        </Marker>
+                    )
+                })}
             
             </Map>
 
