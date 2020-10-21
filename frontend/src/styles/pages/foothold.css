@@ -78,7 +78,7 @@
   margin-top: 64px;
   background: #E6F7FB;
   border: 1px solid #B3DAE2;
-  border-radius: 20px;
+  border-radius: 1rem;
 }
 
 .foothold-details .foothold-details-content .map-container footer {
@@ -94,7 +94,7 @@
 
 .foothold-details .foothold-details-content .map-container .leaflet-container {
   border-bottom: 1px solid #DDE3F0;
-  border-radius: 20px;
+  border-radius: 1rem;
 }
 
 .foothold-details .foothold-details-content hr {
@@ -102,12 +102,12 @@
   height: 1px;
   border: 0;
   background: #D3E2E6;
-  margin: 64px 0;
+  margin: 3.2rem 0 2.4rem;
 }
 
 .foothold-details .foothold-details-content h2 {
-  font-size: 36px;
-  line-height: 46px;
+  font-size: 2.1rem;
+  line-height: 2.4rem;
   color: #4D6F80;
 }
 
@@ -120,37 +120,68 @@
 }
 
 .foothold-details .foothold-details-content .open-details div {
-  padding: 32px 24px;
-  border-radius: 20px;
-  line-height: 28px;
+  padding: 1.5rem 1rem;
+  border-radius: 1rem;
+  line-height: 1.5rem;
 }
 
 .foothold-details .foothold-details-content .open-details div svg {
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 0.6rem;
 }
 
 .foothold-details .foothold-details-content .open-details div.hour {
   background: linear-gradient(149.97deg, #E6F7FB 8.13%, #FFFFFF 92.67%);
-  border: 1px solid #B3DAE2;
-  color: #5C8599;
+  border: 1px solid #7190fd;
+  color: #557c90;
+
+  font-size: 1rem;
+}
+
+.foothold-details .foothold-details-content .open-details div.hour p {
+  margin: 0.6rem 0;
+  line-height: 1.2rem;
 }
 
 .foothold-details .foothold-details-content .open-details div.open-on-weekends {
   background: linear-gradient(154.16deg, #EDFFF6 7.85%, #FFFFFF 91.03%);
-  border: 1px solid #A1E9C5;
-  color: #37C77F;
+  border: 1px solid #7190fd;
+  color: #557c90;
 }
 
+.foothold-details .foothold-details-content .open-details div.open-on-weekends .icon {
+  padding: 0 0.45rem 0 0 ;
+  display: flex;  
+  align-items: center;
+}
+
+.foothold-details .foothold-details-content .open-details div.open-on-weekends .transparent-icon {
+  padding: 0 0.45rem 0 0 ;
+  display: flex;  
+  align-items: center;
+  opacity: 0.5;
+}
+
+.foothold-details .foothold-details-content .open-details div.open-on-weekends p {
+  margin: 0;
+  padding: 0 0.8rem 0 0 ;
+
+  font-size: 1rem;
+  line-height: 1.9rem;
+  display: flex;
+  flex-direction: row;
+}
+
+
 .foothold-details .foothold-details-content button.contact-button {
-  margin-top: 64px;
+  margin-top: 2.5rem;
 
   width: 100%;
   height: 64px;
   border: 0;
   cursor: pointer;
   background: #3CDC8C;
-  border-radius: 20px;
+  border-radius: 1rem;
   color: #FFFFFF;
   font-weight: 800;
 

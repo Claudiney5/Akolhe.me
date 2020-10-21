@@ -24,7 +24,7 @@ interface Foothold {
   water: boolean;
   bathroom: boolean;
   shower: boolean;
-  extra_info: string;
+  extra_info: boolean;
   images: Array<{
     url: string;
   }>;
@@ -80,7 +80,7 @@ export default function Foothold() {
           
           <div className="foothold-details-content">
             <h1>{ foothold.name }</h1>
-            <p>`Fale com ${ foothold.owner }`</p>
+            <p>Fale com { foothold.owner }</p>
 
             <div className="map-container">
               <Map 
@@ -111,14 +111,34 @@ export default function Foothold() {
 
             <div className="open-details">
               <div className="hour">
-                <FiClock size={32} color="#15B6D6" />
-                Segunda à Sexta <br />
-                8h às 18h
+                <h3>Importante!</h3>
+                <p>Respeite sempre as regras da casa!</p>
+                <p>Seja cuidadoso com sons altos.</p>
+                <p>Na dúvida, pergunte ao proprietário.</p>
+                <p>Deixe o local mais limpo e conservado de que quando chegou!</p>
               </div>
+
               <div className="open-on-weekends">
-                <FiInfo size={32} color="#39CC83" />
-                Atendemos <br />
-                fim de semana
+                
+                {foothold.water === true ? ( <p><i className="fas fa-faucet icon"></i> água disponível</p>) 
+                  : (<p><i className="fas fa-faucet transparent-icon"></i> água indisponível</p>)
+                }
+                {foothold.energy ? ( <p><i className="fas fa-plug icon"></i> energia disponível</p>) 
+                  : (<p><i className="fas fa-plug transparent-icon"></i> energia indisponível</p>)
+                }
+                {foothold.bathroom === true ? ( <p><i className="fas fa-toilet icon"></i> sanitário disponível</p>) 
+                  : (<p><i className="fas fa-toilet transparent-icon"></i> sanitário indisponível</p>)
+                }
+                {foothold.shower === true ? ( <p><i className="fas fa-shower icon"></i> chuveiro disponível</p>) 
+                  : (<p><i className="fas fa-shower transparent-icon"></i> chuveiro indisponível</p>)
+                }
+                
+                <p><i className="fas fa-calendar-day icon"></i>
+                Máximo de { foothold.day_max} dias</p>
+                
+                <p><i className="fas fa-hand-holding-usd icon"></i>
+                  Sugestão: R$ { foothold.cost },00/dia</p>
+                
               </div>
             </div>
 
