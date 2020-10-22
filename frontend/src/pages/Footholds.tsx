@@ -45,8 +45,8 @@ function Footholds() {
             </aside>
 
             <Map 
-                center={[-27.5961766,-48.5714132]}
-                zoom={15}
+                center={[-26.9202292,-49.0620727]}
+                zoom={13}
                 style={{
                     width: '100%',
                     height: '100%',

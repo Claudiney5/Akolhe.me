@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { FiClock, FiInfo } from "react-icons/fi";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import { useParams } from 'react-router-dom'
 
@@ -26,6 +25,7 @@ interface Foothold {
   shower: boolean;
   extra_info: boolean;
   images: Array<{
+    id: number;
     url: string;
   }>;
 }
@@ -34,9 +34,11 @@ interface FootholdParams {
   id: string;
 }
 
+
 export default function Foothold() {
   const params = useParams<FootholdParams>()
   const [foothold, setFoothold] = useState<Foothold>()
+  const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   useEffect(() => {
       api.get(`footholds/${params.id}`).then((res) => {
@@ -55,27 +57,23 @@ export default function Foothold() {
 
       <main>
         <div className="foothold-details">
-          <img src={foothold.images[0].url} alt={foothold.name} />
+          <img src={foothold.images[activeImageIndex].url} alt={foothold.name} />
 
           <div className="images">
-            <button className="active" type="button">
-              <img src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg" alt="Lar das meninas" />
-            </button>
-            <button type="button">
-              <img src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg" alt="Lar das meninas" />
-            </button>
-            <button type="button">
-              <img src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg" alt="Lar das meninas" />
-            </button>
-            <button type="button">
-              <img src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg" alt="Lar das meninas" />
-            </button>
-            <button type="button">
-              <img src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg" alt="Lar das meninas" />
-            </button>
-            <button type="button">
-              <img src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg" alt="Lar das meninas" />
-            </button>
+            {foothold.images.map((image, index) => {
+              return (
+                <button 
+                  key={image.id} 
+                  className={activeImageIndex === index ? "active" : ""} 
+                  type="button"
+                  onClick={() => {
+                    setActiveImageIndex(index)
+                  }}
+                >
+                  <img src={image.url} alt={foothold.name} />
+                </button>
+              )
+            })}
           </div>
           
           <div className="foothold-details-content">
@@ -100,7 +98,7 @@ export default function Foothold() {
               </Map>
 
               <footer>
-                <a href="">Ver rotas no Google Maps</a>
+                <a  target="_blank" rel="noopener noreferrer" href={`https://www.google.com/maps/dir/?api=1&destination=${foothold.latitude}, ${foothold.longitude}`}>Ver rotas no Google Maps</a>
               </footer>
             </div>
 
@@ -109,8 +107,8 @@ export default function Foothold() {
             <h2>Informações importantes</h2>
             <p>{ foothold.extra_info }</p>
 
-            <div className="open-details">
-              <div className="hour">
+            <div className="informations">
+              <div className="rules">
                 <h3>Importante!</h3>
                 <p>Respeite sempre as regras da casa!</p>
                 <p>Seja cuidadoso com sons altos.</p>
@@ -118,7 +116,7 @@ export default function Foothold() {
                 <p>Deixe o local mais limpo e conservado de que quando chegou!</p>
               </div>
 
-              <div className="open-on-weekends">
+              <div className="conforts">
                 
                 {foothold.water === true ? ( <p><i className="fas fa-faucet icon"></i> água disponível</p>) 
                   : (<p><i className="fas fa-faucet transparent-icon"></i> água indisponível</p>)
