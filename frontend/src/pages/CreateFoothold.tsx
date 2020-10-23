@@ -1,16 +1,20 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, ChangeEvent } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
-import { LeafletMouseEvent } from 'leaflet'
-
+import { useHistory } from "react-router-dom";
 import { FiPlus } from "react-icons/fi";
+
+import { LeafletMouseEvent } from 'leaflet'
 
 import Sidebar from "../components/Sidebar";
 import mapIcon from "../utils/mapIcon";
+import api from "../services/api";
 
 import '../styles/pages/create-foothold.css';
 
 
-export default function CreateFoothold() {
+export default function FoodholdsMap() {
+  const history = useHistory()
+
   const [position, setPosition] = useState(({ latitude: 0, longitude: 0}))
 
   const [owner, setOwner] = useState('')
@@ -26,6 +30,9 @@ export default function CreateFoothold() {
   const [shower, setShower] = useState(false)
   const [extra_info, setExtraInfo] = useState('')
 
+  const [images, setImages] = useState<File[]>([])
+  const [previewImages, setPreviewImages] = useState<string[]>([]) 
+
 
   function handleMapClick(event: LeafletMouseEvent) {
     const { lat, lng } = event.latlng
@@ -36,22 +43,54 @@ export default function CreateFoothold() {
     })
   }
 
-  function handleSubmit(event: FormEvent) {
+  function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
+    if (!event.target.files) {
+      return
+    }
+    const selectedImages = Array.from(event.target.files)
+    setImages(selectedImages)
+
+    const selectedImagesPreview = selectedImages.map(image => {
+      return URL.createObjectURL(image)
+    })
+    setPreviewImages(selectedImagesPreview)
+  }
+
+  // CRIAR FUNÇÃO E BOTÃO APRA DELETAR IMAGENS DO PREVIEW E DO setImages
+
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault()
 
     const { latitude, longitude } = position
 
-    console.log(
-      owner,
-      name,
-      latitude,
-      longitude,
-      phone,
-      energy,
-      shower,
-      extra_info,
-    )
+    const data = new FormData()
+    
+    data.append('owner', owner)
+    data.append('latitude', String(latitude))
+    data.append('longitude', String(longitude))
+    data.append('name', name)
+    data.append('phone', phone)
+    data.append('whatsapp', String(whatsapp))
+    data.append('city', city)
+    data.append('day_max', day_max)
+    data.append('cost', cost)
+    data.append('energy', String(energy))
+    data.append('water', String(water))
+    data.append('bathroom', String(bathroom))
+    data.append('shower', String(shower))
+    data.append('extra_info', extra_info)
+
+    images.forEach(image => {
+      data.append('images', image)
+    })
+
+    await api.post('footholds', data)
+
+    alert('Bem vindo ao Akolhe.me! Cadastro realizado com sucesso.')
+
+    history.push('/app')
   }
+
 
   return (
     <div id="page-create-foothold">
@@ -60,7 +99,7 @@ export default function CreateFoothold() {
       <main>
         <form onSubmit={handleSubmit} className="create-foothold-form">
           <fieldset>
-            <legend>Dados</legend>
+            <legend>Cadastro de Ponto de Apoio</legend>
 
             <Map 
               center={[-27.2092052,-49.6401092]} 
@@ -231,16 +270,24 @@ export default function CreateFoothold() {
               />
             </div>
 
+{/* ------------------ IMAGES UPLOAD ---------------- */}
+
             <div className="input-block">
               <label htmlFor="images">Fotos</label>
 
-              <div className="uploaded-image">
+              <div className="images-container">
+                {previewImages.map(image =>{
+                  return (
+                    <img key={image} src={image} alt={name} /> 
+                  )
+                })}
 
+                <label htmlFor="image[]" className="new-image">
+                  <FiPlus size={24} color="#15b6d6" />
+                </label>                 
               </div>
 
-              <button className="new-image">
-                <FiPlus size={24} color="#15b6d6" />
-              </button>
+              <input multiple onChange={handleSelectImages} type="file" id="image[]" />
             </div>
           </fieldset>
 
