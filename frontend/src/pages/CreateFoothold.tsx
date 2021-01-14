@@ -56,7 +56,7 @@ export default function FoodholdsMap() {
     setPreviewImages(selectedImagesPreview)
   }
 
-  // CRIAR FUNÇÃO E BOTÃO APRA DELETAR IMAGENS DO PREVIEW E DO setImages
+  // !!!!            CRIAR FUNÇÃO E BOTÃO PARA DELETAR IMAGENS DO PREVIEW E DO setImages
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -100,11 +100,11 @@ export default function FoodholdsMap() {
         <form onSubmit={handleSubmit} className="create-foothold-form">
           <fieldset>
             <legend>Cadastro de Ponto de Apoio</legend>
-
+            
             <Map 
-              center={[-27.2092052,-49.6401092]} 
+              center={[-25.600, -53.00]} 
               style={{ width: '100%', height: 280 }}
-              zoom={12}
+              zoom={6}
               onClick={handleMapClick}
             >
               <TileLayer 
@@ -123,6 +123,11 @@ export default function FoodholdsMap() {
               )}
 
             </Map> 
+            <div className="input-block">
+            <label htmlFor='name'> 
+              <span>Clique no mapa no endereço do ponto de apoio que você deseja criar.</span>
+            </label>
+            </div>
 
             <div className="input-block">
               <label htmlFor="name">Nome do Espaço<span>Um nome legal para o seu cantinho...</span></label>
@@ -291,29 +296,6 @@ export default function FoodholdsMap() {
             </div>
           </fieldset>
 
-          {/* <fieldset>
-            <legend>Visitação</legend>
-
-            <div className="input-block">
-              <label htmlFor="instructions">Instruções</label>
-              <textarea id="instructions" />
-            </div>
-
-            <div className="input-block">
-              <label htmlFor="opening_hours">Nome</label>
-              <input id="opening_hours" />
-            </div>
-
-            <div className="input-block">
-              <label htmlFor="open_on_weekends">Atende fim de semana</label>
-
-              <div className="button-select">
-                <button type="button" className="active">Sim</button>
-                <button type="button">Não</button>
-              </div>
-            </div>
-          </fieldset> */}
-
           <button className="confirm-button" type="submit">
             Confirmar
           </button>
@@ -322,5 +304,3 @@ export default function FoodholdsMap() {
     </div>
   );
 }
-
-// return `https://a.tile.openstreetmap.org/${z}/${x}/${y}.png`;

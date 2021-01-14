@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GiCampingTent, GiExitDoor } from 'react-icons/gi'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
@@ -18,14 +18,47 @@ interface Foothold {
 }
 
 
+let appId = '30c19f4e549b1f59d990ccc77c60dcbc';
+let units = 'metric';
+
+
 function Footholds() {
     const [footholds, setFootholds] = useState<Foothold[]>([])
 
+    const [city, setCity] = useState('')
+    const [lat, setLat] = useState<number>()
+    const [long, setLong] = useState<number>()
+    const [zoom, setMapZoom] = useState<number>()
+    
     useEffect(() => {
         api.get('footholds').then((res) => {
             setFootholds(res.data)
         })
     }, [])
+    
+    function handleSubmit(event: FormEvent){
+        event.preventDefault()
+        const cityData = new FormData()
+        cityData.append('city', city)
+        
+        searchCity(city, event)        
+    }
+    
+    function searchCity(searchTerm: string, event: FormEvent) {
+        event.preventDefault()
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&APPID=${appId}&lang=pt_br&units=${units}`)
+        .then(result => {   
+            return result.json();
+        })
+        .then((result) => {
+            setLat(result.coord.lat)
+            setLong(result.coord.lon)          
+        })
+        .then(() => {
+            setMapZoom(13)            
+        })           
+    }
+  
 
     return (
         <div id="page-map">
@@ -35,25 +68,38 @@ function Footholds() {
                     <img src={ logoPeq } alt="Acolhe-me"/>
 
                     <h2>Escolha um dos acolhedores do mapa</h2>
-                    <p>Você pode selcionar outra cidade ou navegar no mapa arrastando-o.</p>
+                    <p>Você pode selecionar uma cidade abaixo ou navegar no mapa arrastando-o.</p>
                 </header>
 
                 <footer>
-                    <strong> cidade escolhida </strong>
-                    <span>estado</span>
+                    <form onSubmit={handleSubmit} id="city-select" className="city-select">
+                        <fieldset>
+                            <div className="input-city"></div>
+                            <label htmlFor='city'>Cidade de Destino</label>
+                            <input id="city" value={city} onChange={event => setCity(event.target.value)} />
+
+                        </fieldset>
+
+                        <button className="confirm-button" type="submit" >
+                            Buscar
+                        </button>
+
+                    </form>
+
                 </footer>
             </aside>
 
             <Map 
-                center={[-26.9202292,-49.0620727]}
-                zoom={13}
+                zoom={zoom || 4}
+                center={[lat || -25.300, long || -57.600]}
                 style={{
                     width: '100%',
                     height: '100%',
                 }}
             >
+
                 <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            
+                
                 {footholds.map(foothold => {
                     return(
                         <Marker 

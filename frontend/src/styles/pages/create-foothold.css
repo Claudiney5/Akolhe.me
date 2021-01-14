@@ -39,12 +39,26 @@ form.create-foothold-form fieldset legend {
 
   font-size: 2rem;
   line-height: 2.6rem;
-  color: #54788a;
+  color: #4d7183;
   font-weight: 700;
 
   border-bottom: 1px solid #D3E2E5;
   margin-bottom: 2.5rem;
   padding-bottom: 1.4rem;
+}
+
+form.create-foothold-form .map-block label {
+  display: flex;
+  color: #4d7183;
+  margin-bottom: 0.1rem;
+  line-height: 1rem;
+}
+
+form.create-foothold-form .map-block label span {
+  font-size: 0.6rem;
+  color: #4d7183;
+  margin-left: 1rem;
+  line-height: 1rem;
 }
 
 form.create-foothold-form .input-block + .input-block {
@@ -53,14 +67,14 @@ form.create-foothold-form .input-block + .input-block {
 
 form.create-foothold-form .input-block label {
   display: flex;
-  color: #8FA7B3;
+  color: #4d7183;
   margin-bottom: 8px;
   line-height: 24px;
 }
 
 form.create-foothold-form .input-block label span {
   font-size: 0.8rem;
-  color: #8FA7B3;
+  color: #4d7183;
   margin-left: 1.65rem;
   line-height: 1.65rem;
 }

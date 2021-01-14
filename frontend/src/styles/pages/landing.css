@@ -46,23 +46,21 @@
     line-height: 2.1rem;
 }
 
-.content-wrapper .location {
+.content-wrapper .info-extra {
     position: absolute;
     right: 0;
     top: 0;
 
-    font-size: 1.4rem;
-    line-height: 2.1rem;
+    font-size: 0.4rem;
+    line-height: 0.5rem;
 
     display: flex;
     flex-direction: column;
+    max-width: 3rem;
 
     text-align: right;
 }
 
-.content-wrapper .location strong {
-    font-weight: 800;
-}
 
 .content-wrapper .enter-app {
     position: absolute;

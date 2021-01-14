@@ -19,9 +19,8 @@ function Landing() {
                 <p>Lugares para estacionar sua kombihome, fazer novas amizades e conhecer aventuras.</p>
             </main>
 
-            <div className="location">
-                <strong>Blumenau</strong>
-                <span>SC</span>
+            <div className="info-extra">
+                <p>Veja locais de aconhimento, pontos de parada interessantes ou cadastre seu ponto de apoio.</p>
             </div>
 
             <Link to="/app" className="enter-app">
